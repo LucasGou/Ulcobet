@@ -1,0 +1,533 @@
+/*GENERAL*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    background-color: #fff;
+    height: 100%;
+}
+body {
+    color: #333333;
+    font: 0.75em/1.5em Arial,sans-serif;
+}
+
+h1{
+    font-size: 30px;
+    font-family: Arial;
+    margin-left:25%;
+    margin-bottom: 2%;
+}
+
+h2{
+    font-family: Cambria;
+    color: #e77817;
+	font-size:20 px;
+	text-align:center
+}
+
+p{
+    font-size: 12px;
+    font-family: Arial;
+    color: #009ad2
+}
+
+h3{
+    font-family: cambria;
+    color: #e77817;
+    margin-left: 2.5%;
+    margin-bottom: 5px;
+}
+
+
+
+
+/*PAGE*/
+.error{background-color:red;}
+
+
+/* ///////// Classe page MesGages /////////////*/
+.MBMesGages{
+    display:block;
+    width:50%;
+    height:100%;
+    border:2px solid #e77817;
+    margin-left:25%;
+    background-color:#006699;
+    padding-left: 10px;
+}
+/* ///////// Classe page MesGains /////////////*/
+.MBMesGains{
+    display:block;
+    width:50%;
+    height:100%;
+    border:2px solid #e77817;
+    margin-left:25%;
+    background-color:#006699;
+    padding-left: 10px;
+}
+/* ///////// Classe page Inscription /////////////*/
+.MBInscription{
+    display:block;
+    width:50%;
+    height:50%;
+    border:2px solid #e77817;
+    margin-left:25%;
+    background-color:#006699;
+    padding-left: 10px;
+}
+
+/* //////////////// FORMUINSCRIPTION ////////////// */
+#MBFormu{ 
+        position : center; 
+        width : 500px;
+        height: 500px;
+    }
+
+label {
+        display : block;
+        padding-top : 15px;
+        padding-bottom : 5px;
+        font-family:cambria;
+        color:#e77817;
+        font-size:20px;
+
+    }
+
+input
+    {
+      background-color : #DCDCDC ; 
+      border: 1px solid #e77817;
+
+    }
+select
+    {
+        background-color : #DCDCDC ; 
+        border: 1px solid #e77817;
+    }
+
+.LG_formucreapari{
+    display: block;
+    border: 2px solid #e77817;
+    width: 50%;
+    height: 100%;
+    margin-left: 25%;
+    background-color: #006699;
+    padding-left: 10px;
+}
+
+.LG_button{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#LG_contenu {
+	display: block;
+    border: 2px solid #e77817;
+    width: 50%;
+    height: 100%;
+    margin-left: 25%;
+    background-color: #006699;
+    padding-left: 0%;
+	padding-right: 0%;
+	margin-top: 50px;
+	padding-bottom: 20px;
+}
+
+#LG_contenu img{
+	padding: 20px;
+	margin-top: 10px;
+}
+
+#LG_contenu p{
+	float: left;
+}
+
+#LG_proposition{
+    display: block;
+    border: 2px solid #e77817;
+    width: 50%;
+    height: 100%;
+    margin-left: 25%;
+    background-color: #006699;
+    padding-left: 10px;
+}
+
+.AL_ParisGagnes{
+    display: block;
+    height: 50%;
+    width: 50%;
+    border: 1px solid black;
+    padding: 10px;
+    margin-left: 10%;
+    background-color: lightgray;
+    opacity: 0.8;
+}
+
+.AL_ParisPerdus{
+    display: block;
+    height: 50%;
+    width: 50%;
+    border: 1px solid black;
+    padding: 10px;
+    margin-left: 10%;
+    background-color: lightgray;
+    opacity: 0.8;
+}
+
+/*Contacts*/
+.AL_contacts{
+    margin-left: 10%;
+}
+
+.AL_formulaire{
+    padding-left: 10px;
+    margin-left: 15%;
+    width: 50%;
+    background-color:#006699;
+    border: 3px solid orange;
+}
+
+.AL_formulaire input{
+    margin-left: 20px;
+    background-color: whitesmoke;
+    border: 2px solid orange;
+}
+
+.AL_message{
+    width: 70%;
+    padding-bottom: 15%;
+}
+
+.bouton_envoi{
+    margin-top: 2.5%;
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-bottom: 2.5%;
+    padding: 2px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border: 1px solid black;
+    width: 20%;
+}
+
+.bouton_envoi:hover{
+    border: 1px groove darkred;
+    background-color:  coral;
+    transition: background-color 0.5s;
+    cursor: pointer;
+}
+
+.bouton_envoi:hover p{
+    color: red;
+    transition: color 0.5s;
+}
+
+bouton_envoi:active{
+    border: 2px groove red;
+    width: 200%;
+}
+
+/*Mes paris*/
+
+.AL_coordonnees{
+    display: block;
+    float: left;
+    height: 50%;
+    width: 30%;
+    background-color: #006699;
+    border: 3px solid orange;
+    padding: 20px;
+    margin-top: 5%;
+    margin-left: 20%;
+    opacity: 0.8;
+}
+
+.AL_gainsgages{
+    display: block;
+    float: right;
+    height: 50%;
+    width: 30%;
+    background-color: #006699;
+    border: 3px solid orange;
+    padding: 20px;
+    margin-top: 5%;
+    margin-right: 10%;
+    opacity: 0.8;
+}
+
+.DG_UlcoBet_disponibles
+{
+    display: block;
+    text-align: center;
+    border: 2px solid #e77817;
+    width: 50%;
+    height: 100%;
+    margin-left: 25%;
+    background-color: #006699;
+    padding-left: 10px;
+}
+.DG_UlcoBet_encours{
+  display: block;
+  text-align: center;
+  border: 2px solid #e77817;
+  width: 50%;
+  height: 100%;
+  margin-left: 25%;
+  background-color: #006699;
+  padding-left: 10px;
+}
+
+/*PARIS TERMINÉS*/
+
+.DG_UlcoBet_terminés{
+	display: block;
+  text-align: center;
+  border: 2px solid #e77817;
+  width: 50%;
+  height: 100%;
+  margin-left: 25%;
+  background-color: #006699;
+  padding-left: 10px;
+}
+
+/*MENU*/
+
+ul.myTopnav{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+ul.myTopnav li{float: left;}
+
+ul.myTopnav li a{
+	display: inline-block;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+ul.myTopnav li.icon{
+	display: none;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 96%;
+}
+
+#nav span {
+    display: none;
+}
+
+#nav, #nav ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav {
+    background-color: #006699;
+    border-bottom: 2px solid #e77817;
+    float: left;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 5%;
+    position: relative;
+    width: 98%;
+}
+
+#nav > li {
+    border-bottom: 5px solid transparent;
+    float: left;
+    margin-bottom: -5px;
+}
+
+#nav li a {
+    display: block;
+    text-decoration: none;
+    white-space: normal;
+}
+
+#nav > li > a {
+    color: white;
+    display: block;
+    font-size: 1.3em;
+    line-height: 49px;
+    padding: 0 30px;
+}
+
+#nav > li:hover > a, #nav > a:hover {
+    background-color: #009ad2;
+    color: #FFFFFF;
+}
+
+#nav li.active > a {
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+
+
+
+
+/*Mobile*/
+
+@media all and (min-width : 0px) and (max-width : 980px){
+    
+    body{width:100%;}
+    
+    textarea{width:90%;}
+    
+    input{width:auto;}
+    
+    h1{width:100%;
+    margin-left: auto;
+    margin-right:auto;}
+/* Menu Mobile */
+	
+	ul.myTopnav li:not(:first-child) {display:none;}
+	
+	ul.myTopnav li.icon{
+		float: right;
+		display: inline-block;
+	}
+	
+	ul.myTopnav.responsive{position:relative;}
+	
+	ul.myTopnav.responsive li.icon{
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	
+	ul.myTopnav.responsive li{
+		float:none;
+		display:inline;
+	}
+	
+	ul.myTopnav.responsive li a{
+		display:block;
+		text-align:left;
+	}
+   
+    #header{text-align: center;
+    display:block;
+    margin: 0 auto;}
+    
+    #nav > li {
+    border-bottom: 5px solid transparent;
+    float: none;
+    margin-bottom: -5px;
+    }
+    
+    #nav ul.subs {
+        position: relative;
+        top: 0;
+    }
+
+    #nav li:hover ul.subs {
+        display: none;
+    }
+
+    #nav li #s1:target + ul.subs,
+    #nav li #s2:target + ul.subs {
+        display: block;
+    }
+
+    #nav ul.subs > li {
+        display: block;
+        width: auto;
+        float: none;
+    }
+	
+/*PAGE MOBILE*/	
+
+	#LG_contenu{margin-left: 10%;
+    margin-right:10%;
+    width:auto;}
+	
+	  #LG_proposition{
+    margin-left: 10%;
+    margin-right:10%;
+    width:auto;}
+	
+    .LG_formucreapari{
+    margin-left: 10%;
+    margin-right:10%;
+    width:auto;}
+	
+	.AL_Contacts{
+        margin-left: 10%;
+        margin-right:10%;
+        width:auto;
+    }
+	
+	.AL_ParisGagnes{
+        margin-left: 5%;
+        margin-right: 5%;
+        width: auto;
+    }
+
+    .AL_ParisPerdus{
+        margin-left: 5%;
+        margin-right: 5%;
+        width: auto;
+    }
+
+    .AL_coordonnees{
+        width: auto;
+        margin-top: 50px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 5%;
+    }
+
+    .AL_gainsgages{
+        float: left;
+        width: auto;
+        margin-left: 5%;
+    }
+
+    .AL_formulaire{
+        margin-left: 2%;
+        width: 75%;
+    }
+	
+	.MBInscription{
+    margin-left:10%;
+    margin-right:10%;
+    width:auto;
+    }
+    
+ .MBMesGages{
+    margin-left:10%;
+    margin-right:10%;
+    width:auto;
+    }
+    
+ .MBMesGains{
+    margin-left:10%;
+    margin-right:10%;
+    width:auto;
+    }
+	
+	.DG_UlcoBet_disponibles{
+		margin-left: 10%;
+    	margin-right:10%;
+    	width:auto;}
+
+    .DG_UlcoBet_encours{
+    	margin-left: 10%;
+    	margin-right:10%;
+    	width:auto;}
+}
+}
+
