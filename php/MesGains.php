@@ -2,23 +2,19 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<link rel='stylesheet' href='../style.css'>
-		<script type="text/javascript" src="../js/menu.js"></script>
-
+	<link rel='stylesheet' href='style.css'>
+	
+	
+	
 	<title>Mes gains</title>
 </head>
 <body>
 	<div id='header'>
         <a href="../Accueil/accueil.html"><img height="157" src="ulcobet.png" width="207" /></a>
-		        <input type="text" placeholder="Nom de compte" name="userid" id="userid" class="userid"/>
-        <input type="password" placeholder="Mot de passe" name="pass" id="pass" class="pass" /> 
-        <button class="connex" >Se connecter </button>
-        <button class="inscri" value="Inscription.html">Inscription </button>
 	</div>
 
-<div class="container">
-		<ul id="nav" class="myTopnav">
-			<li><a></a></li>
+	<div class="container">
+		<ul id="nav">
 			<li><a href="../Accueil/accueil.html">Accueil</a></li>
 			<li><a href="../Paris dispo/Parisdispo.html">Ulcobet</a>
 			<li><a href="../Paris terminés/Paristermine.html">Résultats</a>
@@ -26,7 +22,6 @@
 			<li><a href="../Contacts/Contacts.html">Contact</a></li>
 			<li><a href="../Creation pari/creationpari.html">Creation pari</a></li>
 			<li><a href="../Proposition gage/creationgage.html">Proposition gage</a></li>
-			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
 		</ul>
 </div>
     
@@ -39,10 +34,7 @@
     
         <p> Voici un tableau récapitulant vos gains obtenus suite à des paris gagnés.
         </p>
-        
-        <h1>METTRE TABLEAU</h1>
-        <p> Tableau php
-        </p>
+        <?php include('test.php'); ?>
     </div>
     </div>
     

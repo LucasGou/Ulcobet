@@ -13,6 +13,10 @@
 <body>
 	<div id='header'>
         <a href="../Accueil/accueil.html"><img height="157" src="ulcobet.png" width="207" /></a>
+		        <input type="text" placeholder="Nom de compte" name="userid" id="userid" class="userid"/>
+        <input type="password" placeholder="Mot de passe" name="pass" id="pass" class="pass" /> 
+        <button class="connex" >Se connecter </button>
+        <button class="inscri" value="Inscription.html">Inscription </button>
 	</div>
 
 	<div class="container">
@@ -35,30 +39,30 @@
      <div class="MBInscription">
                     <form class="Formu" novalidate>
                         <div class="formulaire">
-            <label for="civilité">Civilite*</label>
+            <label for="civilité"><h5>Civilite *</h5></label>
             <select name="civilité">
                 <option value="Monsieur">Monsieur</option>
                 <option value="Madame">Madame</option>
                 <option value="Autres">Autres</option></select>
             <br />
-            <label for="nom">Nom*</label>
+            <label for="nom"><h5>Nom *</h5></label>
                 <input type="text" placeholder="nom" id="nom" required/>
                 <input type="text" placeholder="prenom" id="prenom" required/>
             <br />
-                    <div class="email">
-                <label for="email">Email*</label>
+               <div class="email">
+                <label for="email"><h5>Email *</h5></label>
                 <input type="email" placeholder="nom@mel-etu...ou univ-litt..." required/>
                 <br />
                     <div class="password">
-                <label for="password">Mot de passe*</label>
+                <label for="password"><h5>Mot de passe *</h5></label>
                 <input type="password" placeholder="mdp" required/>
                  <br />
                     <div class="dateanniv">
-                <label for="dateanniv">Date anniversaire</label>
+                <label for="dateanniv"><h5>Date anniversaire</h5></label>
                 <input type="date" placeholder="ex:12/05/98" />
                 <br />
                     <div class="numtel">
-                <label for="numtel">Num tel</label>
+                <label for="numtel"><h5>Num tel</h5></label>
                 <input type="text" placeholder="060516515" />
                  <br /> 
                      <br />    
@@ -66,7 +70,7 @@
                     <input type="submit" value="Envoyer"/><br>
                 </div>
                            
-                           <p> * = champs obligatoires !</p>
+                           <p> * champs obligatoires</p>
             </div>
                 </div>            
         </div>

@@ -15,6 +15,10 @@
 <body>
 	<div id='header'>
         <a href="../Accueil/accueil.html"><img height="157" src="ulcobet.png" width="207" /></a>
+		        <input type="text" placeholder="Nom de compte" name="userid" id="userid" class="userid"/>
+        <input type="password" placeholder="Mot de passe" name="pass" id="pass" class="pass" /> 
+        <button class="connex" >Se connecter </button>
+        <button class="inscri" value="Inscription.html">Inscription </button>
 	</div>
 
 	<div class="container">
@@ -39,14 +43,14 @@
             <strong>Envoyez votre message, notre équipe tâchera de vous répondre le plus rapidement possible !</strong></p>
             <br>
             <div class="AL_formulaire">
-                <h3>Nom d'utilisateur :</h3>
-                <input required />
+                <label for="nd"><h5>Nom d'utilisateur :</h5></label>
+                <input id="nd" required />
                 <br>
-                <h3>Adresse e-mail :</h3>
-                <input required />
+                <label for="am"><h5>Adresse e-mail :</h5></label>
+                <input id="am" required />
                 <br>
-                <h3>Message :</h3>
-                <input class="AL_message" required />
+                <label for="message"><h5>Message :</h5></label>
+                <input id="message" class="AL_message" required />
                 <br>
                 <div class="button">
 					<input type="submit" value="Envoyer"/><br>
