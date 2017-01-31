@@ -118,7 +118,7 @@ button.inscri{
 	border-color: white;
     border-width: 1px;
 	width:44%;
-}
+    }
 
 #Actus2{
 	display: block;
@@ -162,8 +162,12 @@ button.inscri{
 
 #DL_contenu img{
    margin-top: 5px;
-   margin-left: 5px; 
+   margin-left: 5px;
 }
+
+a.texte1{position: absolute;
+margin-top: 3%;
+margin-left: 3%;}
 
 
 /* ///////// Classe page MesGages /////////////*/
@@ -541,6 +545,11 @@ ul.myTopnav li.icon{
     h1{width:100%;
     margin-left: 3%;
     margin-right:auto;}
+    
+    a.texte1{position: absolute;
+        font-size: 65%;}
+    
+    #DL_contenu img{ width: 50%; height: 50%;}
 	
 /* Menu sur Mobile */
 	
