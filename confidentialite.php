@@ -8,6 +8,7 @@ if(isset($_POST['deco'])){
 	header("Refresh:0");
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,7 @@ if(isset($_POST['deco'])){
     
     
 	if(!isset($_SESSION['username'])){   
-    echo "<form action='confidentialite.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></form>";
+    echo "<form action='confidentialite.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button></form><a href='inscription.php'><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></a>";
     }?>	</div>
 
 	<div class="container">
@@ -44,20 +45,21 @@ if(isset($_POST['deco'])){
 			<li><a href="parisencemoment.php">En ce moment</a>
 			<?php 
     			if(isset($_SESSION['username'])){
-					echo "<li><a href='parisresultats.php'>RÃ©sultats</a>";
+					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
-			?>
+			?>			
 			<li><a href="contacts.php">Contact</a></li>
 			<?php 
  			    if(isset($_SESSION['username'])){
-					echo"<li><a href='creationpari.php'>CrÃ©er un pari</a></li>";
+					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
 				}
-			?>
+			?>			
 			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
 		</ul>
-</div><div id ="LG_contenu">
+</div>
+<div id ="LG_contenu">
 		<h1>Confidentialite</h1>
 		  <div class ="LG_formucreapari">
 				<form class="Formu" novalidate>
@@ -72,7 +74,7 @@ if(isset($_POST['deco'])){
     
                 
 
-                <label for="datedebut"><p>Pour la sÃ©curitÃ© de votre compte veuillez entre votre date de naissance:</p></label>
+                <label for="datedebut"><p>Pour la securite de votre compte veuillez entre votre date de naissance:</p></label>
 			    <input type="date" placeholder="date de naissance" id="LG_ddf" /></br></br></br>
 
                 <div class ="LG_button">

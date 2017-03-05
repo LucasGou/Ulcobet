@@ -96,14 +96,19 @@ button{
 
 button.connex{
     float: right;
-    margin-right:-10%;
-    margin-top: 2%;
+    margin-right:10%;
+    margin-top: 26px;
+    position: absolute;
+    right: 10px;
+   
 	}
 
 button.inscri{
     float: right;
-    margin-right:-21%;
-    margin-top: 2%;
+    margin-right:5%;
+    margin-top: -44px;
+    position:absolute;
+    right: 1px;
 }
 
 .userid{
@@ -318,7 +323,15 @@ display: block;
 
 /*Contacts*/
 .AL_contacts{
-    margin-left: 10%;
+  display: block;
+  width: 50%;
+  height: 100%;
+  margin-left: 25%;
+  padding-left: 10px;
+  background-color: #f0f0f0;
+  border-style: groove;
+  border-color: white;
+  border-width: 1px;
 }
 
 .Formu p{
@@ -440,9 +453,9 @@ margin-top: 2%;
 margin-left:30%;
 margin-right:30%;
 }
-/*PARIS TERMINÃ‰S*/
+/*PARIS TERMINES*/
 
-.DG_UlcoBet_terminÃ©s{
+.DG_UlcoBet_termines{
   display: block;
   text-align: center;
   width: 50%;
@@ -505,7 +518,7 @@ ul.myTopnav li.icon{
     margin-right: 1%;
     margin-bottom: 4%;
     position: relative;
-    width: 96.8%;
+    width: 98%;
 }
 
 #nav > li {
@@ -539,7 +552,17 @@ ul.myTopnav li.icon{
 }
 
 
+table{
+background-color :#E8E8E8;
+border : 1px solid black;
+box-shadow: 5px 5px 2px black;
+}
 
+td, th{
+
+border-left :1px dashed;
+
+}
 
 
 /*Mobile*/
@@ -776,3 +799,4 @@ button.inscri{
 }
 
 
+					

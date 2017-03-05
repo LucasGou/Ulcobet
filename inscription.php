@@ -26,15 +26,16 @@ if(isset($_POST['deco'])){
 		        <?php 
     if(isset($_SESSION['username'])){
     	echo "<h1 class='bonjour'>Bonjour, ".$_SESSION['username']."</h1>";
-    	echo "<form action='confidentialite.php' method='POST' class='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
+    	echo "<form action='inscription.php' method='POST' class='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
 
     }
     
     
     
 	if(!isset($_SESSION['username'])){   
-    echo "<form action='confidentialite.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></form>";
-    }?>	</div>
+    echo "<form action='inscription.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button></form><a href='inscription.php'><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></a>";
+    }?>
+	</div>
 
 	<div class="container">
 		<ul id="nav" class="myTopnav">
@@ -43,14 +44,14 @@ if(isset($_POST['deco'])){
 			<li><a href="parisencemoment.php">En ce moment</a>
 			<?php 
     			if(isset($_SESSION['username'])){
-					echo "<li><a href='parisresultats.php'>RÃ©sultats</a>";
+					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
 			?>
 			<li><a href="contacts.php">Contact</a></li>
 			<?php 
  			    if(isset($_SESSION['username'])){
-					echo"<li><a href='creationpari.php'>CrÃ©er un pari</a></li>";
+					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
 				}
 			?>			
@@ -62,7 +63,8 @@ if(isset($_POST['deco'])){
         <h1>Formulaire d'inscription</h1>
         <br/>
      <div class="MBInscription">
-                    <?php 
+                   
+  <?php 
         
         
         require_once "tag.lib.php";
@@ -70,11 +72,11 @@ require_once "check.lib.php";
 try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
 }catch(PDOException $error){ die($error->getMessage() );}
 
-            $body="<form method='POST' action=Inscription.php>\n";
+            $body="<form method='POST' action=inscription.php>\n";
 $body.=entete('Inscription');
 
 $body.="<label for='Adresse_email'><h5>Adresse_email</h5></label>";
-$body.="<input type text='text' name='Adresse_email' placeholder='mamamamame@exemple.com'>";
+$body.="<input type text='text' name='Adresse_email' placeholder='email@univ-littoral.fr'>";
 $body.="</br>";
 $body.="<label for='Nom'><h5>Nom</h5></label>";
 $body.="<input type text='text' name='Nom' placeholder='dupont'>";
@@ -118,8 +120,8 @@ $Mot_de_passe= $row['Mot_de_passe']."\t";
 
          
         if((isset($_POST['Adresse_email'])!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Pseudo']!=NULL)&&($_POST['Mot_de_passe']!=NULL)){
-        header ('location: ../Accueil/accueil.html');
-      //  echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
+        header ('location: index.php');
+        //echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
         }
 
             
@@ -130,10 +132,47 @@ $Mot_de_passe= $row['Mot_de_passe']."\t";
          
          
          
-   
+         
+require_once "template.php";
 
-?>        
+?>
         </div>
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        ?>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
          </div>
         
 

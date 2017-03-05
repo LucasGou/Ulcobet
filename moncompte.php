@@ -8,6 +8,7 @@ if(isset($_POST['deco'])){
 	header("Refresh:0");
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,14 +25,14 @@ if(isset($_POST['deco'])){
 		        <?php 
     if(isset($_SESSION['username'])){
     	echo "<h1 class='bonjour'>Bonjour, ".$_SESSION['username']."</h1>";
-    	echo "<form action='index.php' method='POST' class='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
+    	echo "<form action='moncompte.php' method='POST' class='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
 
     }
     
     
     
 	if(!isset($_SESSION['username'])){   
-    echo "<form action='index.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></form>";
+    echo "<form action='moncompte.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button></form><a href='inscription.php'><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></a>";
     }?>	</div>
 
 <div class="container">
@@ -41,24 +42,23 @@ if(isset($_POST['deco'])){
 			<li><a href="parisencemoment.php">En ce moment</a>
 			<?php 
     			if(isset($_SESSION['username'])){
-					echo "<li><a href='parisresultats.php'>RÃ©sultats</a>";
+					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
 			?>
 			<li><a href="contacts.php">Contact</a></li>
 			<?php 
  			    if(isset($_SESSION['username'])){
-					echo"<li><a href='creationpari.php'>CrÃ©er un pari</a></li>";
+					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
 				}
-			?>			
-			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
+			?>			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
 		</ul>
 </div>
         
        <h1>Mon compte :</h1> 
         <div class="AL_coordonnees">
-            <h2>Mes coordonnées :</h2>
+            <h2>Mes coordonnees :</h2>
             <br>
                 <h3>Nom :</h3>
                 <h3>Prenom :</h3>
@@ -73,7 +73,7 @@ if(isset($_POST['deco'])){
             <h3>Mes gains :</h3>
             <h3>Mes gages :</h3>
             <br>
-            <a href="" >Paramètres de confidentialité</a>
+            <a href="" >Parametres de confidentialites</a>
         </div>
     </body>
 </html>

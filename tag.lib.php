@@ -1,91 +1,53 @@
-<?php	
-	function tag($tag, $content="", $attributs=array(), $before ="", $after =""){
-		
-		$html = "$before";
-		$html .= "<$tag ";
-		foreach($attributs as $a => $v){
-
-			$html .= "$a= '$v' ";
+<?php
+function tag($tag, $content=null,$attributs=array(),$after ='',$before=''){
 	
-		}
+	$str_att='';
+	foreach($attributs as $key =>$value){
+	$str_att .= " $key =\"$value\" ";
+									 	}
 	
-		$html .= ">$content";
-		if ($content != ""){
-		$html .= "</$tag>"; }
-		$html .= "$after";
+	if($content)return "$before<$tag$str_att>$content</$tag>$after";
+	else return "$before<$tag$str_att/>$after";
+	
+}	                                                                    	
 
-		return $html;
 
+function form($content,$method="POST",$action='#',$attributs=array()){
+
+$attributs['method']=$method;
+$attributs['action']=$action;
+return tag('form',$content,$attributs);
+}
+
+
+
+function paragraphe($content,$attributs=array()){
+return tag('p',$content,$attributs,"\n");
+}
+
+function entete($content,$attributs=array()){
+return tag('h2',$content,$attributs);
+}							
+
+function image($name,$attributs=array(),$directory='Images'){
+	$attributs['src']=$name ;
+	return tag('Images',null,$attributs);
 	}
 
+function hcell($content,$attributs=array()){
+return tag('td',$content,$attributs);
+}
 
-	function paragraphe($content2="", $attributs2=array()){
-	
-		$paragraph = tag("p", $content2, $attributs2);
+function cell($content,$attributs=array()){
+return tag('th',$content,$attributs);
+}
 
-		return $paragraph;	
-	
-	}
+function row($content,$attributs=array()){
+return tag('tr',$content,$attributs);
+}
 
-	function formulaire($content3="",$action="#", $method="post", $attributss3=array()){
-
-		$attributsspec = array("method" => $method, "action" => $action);
-		$attributs3 = array_merge($attributsspec, $attributss3);
-		$formu = tag("form", $content3, $attributs3);
-	
-		return $formu;	
-	
-	}
-
-	function inputt($name, $type="text", $value="", $before2 ="", $after2 ="", $attributss4=array()){
-	
-		$attributsspec2 = array("name" => $name, "type" => $type, "value" => $value);
-		$attributs4 = array_merge($attributsspec2, $attributss4);
-		$input = tag("input", "", $attributs4, $before2, $after2);
-
-		return $input;	
-	
-	}
-
-	function table($contenttable){
-	
-		$tablo = tag("table", $contenttable);
-	
-		return $tablo;
-
-	}
-
-	function row($contentrow){
-	
-		$ligne = tag("tr", $contentrow);
-
-		return $ligne;
-
-	}
-
-	function cell($contentcell){
-	
-		$cellule = tag("td", $contentcell);
-	
-		return $cellule;
-
-	}
-
-	function select($options=array(), $optionsattr=array(), $attributsselect=array()){
-		$compteur = 0;
-		$contentsel = "";
-
-		foreach($options as $a){
-			$attroptions = array("value" => $optionsattr[$compteur]);
-			$contentsel .= tag("option", $a, $attroptions);
-			$compteur++;
-
-		}
-
-		$selection = tag("select", $contentsel, $attributsselect);
-
-		return $selection;
-
-	}
-
+function table($content,$attributs=array()){
+return tag('table',$content,$attributs);
+}
+														
 ?>

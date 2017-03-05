@@ -14,7 +14,7 @@ if(isset($_POST['deco'])){
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<title>Contacts</title>
-    <link rel="icon" type="image/png" href="ulcobet.png"/>
+    <link rel="icon" type="image/png" href="Images/ulcobet.png"/>
     <link rel="stylesheet" href="style.css">
 	
 <script type="text/javascript" src="js/jquery.js"></script>
@@ -28,14 +28,14 @@ if(isset($_POST['deco'])){
 		        <?php 
     if(isset($_SESSION['username'])){
     	echo "<h1 class='bonjour'>Bonjour, ".$_SESSION['username']."</h1>";
-    	echo "<form action='confidentialite.php' method='POST' class='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
+    	echo "<form action='contacts.php' method='POST' class='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
 
     }
     
     
     
 	if(!isset($_SESSION['username'])){   
-    echo "<form action='confidentialite.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></form>";
+    echo "<form action='contacts.php' method='POST' class='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button></form><a href='inscription.php'><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></a>";
     }?>	</div>
 
 	<div class="container">
@@ -45,28 +45,31 @@ if(isset($_POST['deco'])){
 			<li><a href="parisencemoment.php">En ce moment</a>
 			<?php 
     			if(isset($_SESSION['username'])){
-					echo "<li><a href='parisresultats.php'>RÃ©sultats</a>";
+					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
-			?>
+			?>			
 			<li><a href="contacts.php">Contact</a></li>
 			<?php 
  			    if(isset($_SESSION['username'])){
-					echo"<li><a href='creationpari.php'>CrÃ©er un pari</a></li>";
+					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
 				}
-			?>
+			?>			
 			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
 		</ul>
-</div>    
+		</ul>
+</div>
+    
         <div id="ALContenu">
         <h1>Formulaire de contact :</h1>
         <div class="AL_contacts">
-		<form class="Formu" novalidate>
-            <p>Un bug ? Un problÃ¨me ? Une demande de partenariat ?<br>
-            <strong>Envoyez votre message, notre Ã©quipe tÃ¢chera de vous rÃ©pondre le plus rapidement possible !</strong></p>
+		
+            <p>Un bug ? Un probleme ? Une demande de partenariat ?<br>
+            <strong>Envoyez votre message, notre equipe tachera de vous repondre le plus rapidement possible !</strong></p>
             <br>
-            <?php 
+            
+                <?php 
         
         
         require_once "tag.lib.php";
@@ -81,7 +84,7 @@ $body.="<label for='nd'><h5>Nom d'utilisateur</h5></label>";
 $body.="<input type text='text' name='nd' placeholder='Nom utilisateur'>";
                 
 $body.="<label for='Adresse_email'><h5>Adresse_email</h5></label>";
-$body.="<input type text='text' name='Adresse_email' placeholder='mamamamame@exemple.com'>";
+$body.="<input type text='text' name='Adresse_email' placeholder='email@univ-littoral.fr'>";
 $body.="</br>";
 
 $body.="<label for='Message'><h5>Message</h5></label>";
@@ -104,8 +107,17 @@ if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll ");
  
         
 if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
-?>        </div>
-        </div>
+
+     require_once "template.php";
+?>
         
+                
+    
+            
+            
+        </div>
+        </div>
     </body>
 </html>
+            
+            
