@@ -63,15 +63,49 @@ if(isset($_POST['deco'])){
 </div>
 		<h1>Proposition de gages :</h1>
                 <div id="LG_proposition">
-				<form class="Formu" novalidate>
-			         <label class=proposition for="Proposition"><p>Entrez la description de votre gage pour le proposer aux moderateurs du site:</p></label>
-			         <textarea text = "Description du pari" placeholder="Ecrivez une description compléte et précise de votre gage, nos modérateurs tâcherons de l'examiner le plus rapidement possible" rows="10" cols="70" required></textarea> </br></br>
+				<?php 
         
-                    <div class ="LG_button">
-                        <input  type="submit" value = "Proposer aux admins"/></br>
-                    </div>
-                </div>
-                </form>
-                
+        
+        require_once "tag.lib.php";
+        require_once "check.lib.php";
+              
+              
+              
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+$body="<form method='POST' action=PropositionGage.php>\n";
+
+
+
+$body.="<label for='Libelle'><h5>Description du gage</h5></label>";
+$body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description comléte et précise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>";
+$body.="</br>";
+$body.="</br>";
+
+$body.="<input  type='submit' value = 'Proposer aux admins'/>";
+$body.="</br>";
+$body.="</br>";
+$body.="</form>";
+       
+        $req="SELECT * FROM Proposer_gage";
+        $body.="<table>\n";
+         $css="style.css";
+  
+if((isset($_POST['Libelle'])!=NULL)){
+$sqll="INSERT INTO Proposer_gage(Libelle) VALUES(lower('{$_POST['Libelle']}'));";
+if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
+
+}
+ 
+        
+if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
+
+
+     $body.="</table>\n";
+
+
+
+?>                </div>
 </body>
 </html>

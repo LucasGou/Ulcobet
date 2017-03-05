@@ -65,10 +65,39 @@ if(isset($_POST['deco'])){
         <p> Voici un tableau récapitulant vos gains obtenus suite à des paris gagnés.
         </p>
         
-        <h1>METTRE TABLEAU</h1>
-        <p> Tableau php
-        </p>
-    </div>
+         <?php
+require_once "tag.lib.php";
+require_once "check.lib.php";
+
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+// Inscription , ulcobet , resultat , mes paris 
+
+$title="Gains";
+
+$req="SELECT * FROM Gain";
+
+$body="<table>\n";
+
+$css="style.css";
+
+
+if(!$result=$base->query($req)) die("Probleme $req");
+
+foreach($result as $row){
+$LibelleGain=$row['LibelleGain']."\t";
+$DateMisEnLigne=$row['DateMisEnLigne']."\t";
+
+
+$body.=row(cell($LibelleGain).cell($DateMisEnLigne));
+
+}
+
+$body.="</table>\n";
+
+
+?>    </div>
     </div>
     
     

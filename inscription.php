@@ -62,50 +62,77 @@ if(isset($_POST['deco'])){
         <h1>Formulaire d'inscription</h1>
         <br/>
      <div class="MBInscription">
-                    <form class="Formu" novalidate>
-                        <div class="formulaire">
-            <label for="civilité"><h5>Civilite *</h5></label>
-            <select name="civilité">
-                <option value="Monsieur">Monsieur</option>
-                <option value="Madame">Madame</option>
-                <option value="Autres">Autres</option></select>
-            <br />
-            <label for="nom"><h5>Nom *</h5></label>
-                <input type="text" placeholder="nom" id="nom" required/>
-                <input type="text" placeholder="prenom" id="prenom" required/>
-            <br />
-               <div class="email">
-                <label for="email"><h5>Email *</h5></label>
-                <input type="email" placeholder="nom@mel-etu...ou univ-litt..." required/>
-                <br />
-                    <div class="password">
-                <label for="password"><h5>Mot de passe *</h5></label>
-                <input type="password" placeholder="mdp" required/>
-                 <br />
-                    <div class="dateanniv">
-                <label for="dateanniv"><h5>Date anniversaire</h5></label>
-                <input type="date" placeholder="ex:12/05/98" />
-                <br />
-                    <div class="numtel">
-                <label for="numtel"><h5>Num tel</h5></label>
-                <input type="text" placeholder="060516515" />
-                 <br /> 
-                     <br />    
-                <div class="button">
-                    <input type="submit" value="Envoyer"/><br>
-                </div>
-                           
-                           <p> * champs obligatoires</p>
-            </div>
-                </div>            
-        </div>
-             </div>
-             
-                            
-                            </div>
-        </form>
-		      
+                    <?php 
         
+        
+        require_once "tag.lib.php";
+require_once "check.lib.php";
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+            $body="<form method='POST' action=Inscription.php>\n";
+$body.=entete('Inscription');
+
+$body.="<label for='Adresse_email'><h5>Adresse_email</h5></label>";
+$body.="<input type text='text' name='Adresse_email' placeholder='mamamamame@exemple.com'>";
+$body.="</br>";
+$body.="<label for='Nom'><h5>Nom</h5></label>";
+$body.="<input type text='text' name='Nom' placeholder='dupont'>";
+$body.="</br>";
+$body.="<label for='Prenom'><h5>Prenom</h5></label>";
+$body.="<input type text='text' name='Prenom' placeholder='Jean'>";
+$body.="</br>";
+$body.="<label for='Pseudo'><h5>Pseudo</h5></label>";
+$body.="<input type text='text' name='Pseudo' placeholder='Djean'>";
+$body.="</br>";
+$body.="<label for='Mot_de_passe'><h5>Mot de passe</h5></label>";
+$body.="<input type text='Mot_de_passe' name='Mot_de_passe'>";
+$body.="</br>";  
+$body.="<input type=submit value='Inscription'>";
+$body.="</br>";
+$body.="</form>";
+        
+        $req="SELECT * FROM Utilisateur";
+         
+         $css="style.css";
+        
+if((isset($_POST['Adresse_email'])!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Mot_de_passe']!=NULL)&&($_POST['Pseudo']!=NULL)){
+$sqll="INSERT INTO Utilisateur(Adresse_email,Nom,Prenom,Pseudo,Mot_de_passe) VALUES(lower('{$_POST['Adresse_email']}'),lower('{$_POST['Nom']}'),lower('{$_POST['Prenom']}'),lower('{$_POST['Pseudo']}'),lower('{$_POST['Mot_de_passe']}'));";
+if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
+
+}
+ 
+        
+if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
+/*
+foreach($result as $row){
+
+$IdUser=$row['IdUser']."\t";
+$Adresse_email=$row['Adresse_email']."\t";    
+$Nom= $row['Nom']."\t";
+$Prenom=$row['Prenom']."\t";
+$Pseudo=$row['Pseudo']."\t";
+$Mot_de_passe= $row['Mot_de_passe']."\t";
+} */
+     
+
+         
+        if((isset($_POST['Adresse_email'])!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Pseudo']!=NULL)&&($_POST['Mot_de_passe']!=NULL)){
+        header ('location: ../Accueil/accueil.html');
+      //  echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
+        }
+
+            
+         
+         
+         
+         
+         
+         
+         
+   
+
+?>        
         </div>
          </div>
         

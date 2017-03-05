@@ -66,20 +66,45 @@ if(isset($_POST['deco'])){
             <p>Un bug ? Un problÃ¨me ? Une demande de partenariat ?<br>
             <strong>Envoyez votre message, notre Ã©quipe tÃ¢chera de vous rÃ©pondre le plus rapidement possible !</strong></p>
             <br>
-            <div class="AL_formulaire">
-                <label for="nd"><h5>Nom d'utilisateur :</h5></label>
-                <input id="nd" required />
-                <br>
-                <label for="am"><h5>Adresse e-mail :</h5></label>
-                <input id="am" required />
-                <br>
-                <label for="message"><h5>Message :</h5></label>
-                <input id="message" class="AL_message" required />
-                <br>
-                <div class="button">
-					<input type="submit" value="Envoyer"/><br>
-				</div>
-        </div>
+            <?php 
+        
+        
+        require_once "tag.lib.php";
+require_once "check.lib.php";
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+            $body="<form method='POST' action=Contact.php>\n";
+
+
+$body.="<label for='nd'><h5>Nom d'utilisateur</h5></label>";  
+$body.="<input type text='text' name='nd' placeholder='Nom utilisateur'>";
+                
+$body.="<label for='Adresse_email'><h5>Adresse_email</h5></label>";
+$body.="<input type text='text' name='Adresse_email' placeholder='mamamamame@exemple.com'>";
+$body.="</br>";
+
+$body.="<label for='Message'><h5>Message</h5></label>";
+$body.="<textarea text='text' id='Message' name='Message' placeholder='Ecrivez votre message' rows='10' cols='70'></textarea>"; 
+$body.="</br>";                
+      $body.="</br>";           
+$body.="<input type=submit value='Envoyer'>";
+$body.="</br>";
+$body.="</form>";
+        
+        $req="SELECT * FROM Contact";
+         
+         $css="style.css";
+        
+if((isset($_POST['Adresse_email'])!=NULL)&&($_POST['nd']!=NULL)&&($_POST['Message']!=NULL)){
+$sqll="INSERT INTO Contact(nd,Adresse_email,Message) VALUES(lower('{$_POST['nd']}'),lower('{$_POST['Adresse_email']}'),lower('{$_POST['Message']}'));";
+if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
+
+}
+ 
+        
+if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
+?>        </div>
         </div>
         
     </body>

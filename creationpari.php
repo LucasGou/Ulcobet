@@ -61,28 +61,69 @@ if(isset($_POST['deco'])){
 </div>
 		<h1>Creation de  pari</h1>
 		  <div class ="LG_formucreapari">
-		  <form class="Formu" novalidate>
-			    <label for="Titrepari"><h5>Titre du pari</h5></label>
-                <input  id="Titrepari" type="text" placeholder="Titre pari" id="LG_Titre" /></br></br>
-    
-			    <label for="Description du pari"><h5>Description du pari</h5></label>
-			    <textarea text = "Description du pari" id="Description du pari" placeholder="Ecrivez une description comléte et précise de votre pari (mise en jeu, adversaire, categorie, ...)" rows="10" cols="70"></textarea> </br></br>
-	       		
-			    <label for="datedebut"><h5>Date de début et de fin du pari:</h5></label>
-			    <input type="date" id="Datedebut" name="datedebut" placeholder="Date de début" id="LG_ddb" />
-			    <input type="date" id="Dateecheance" name="dateecheance" placeholder="Date de fin" id="LG_ddf" /></br></br>
+		  <?php 
+        
+        
+        require_once "tag.lib.php";
+        require_once "check.lib.php";
+              
+              
+              
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
 
-                <label for="Choix du gage pour le perdant"><h5>Choix du gage pour le perdant</h5></label>
-                <input type="submit" id="Choix du gage pour le perdant" value = "Choix dans la liste aleatoire"/>
-                <a href="roulette/roulette.html"><input type="submit" value = "Tourner la roulette des gages" /></a></br></br></br>
+$body="<form method='POST' action=Creationpari.php>\n";
+$body.=entete('Proposer votre pari');
 
-                <div class ="LG_button">
-			    <input  type="submit" value = "Proposer aux admins" /></br>
-                </div>
-				</form>
-                
+$body.="<label for='Titre'><h5>Titre du pari</h5></label>";
+$body.="<input type text='text' name='Titre' placeholder='Damien aura-t-il son semestre?'>";
+$body.="</br>";
+$body.="</br>";
 
-	    </div>
-	</div>
+              
+              $body.="<label for='Libelle'><h5>Description du pari</h5></label>";
+$body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description comléte et précise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>"; 
+$body.="</br>";
+$body.="</br>";
+
+/*
+$body.="<label for='Choix du gage pour le perdant'><h5>Choix du gage pour le perdant</h5></label>";
+$body.="<input type='submit' id='Choix du gage pour le perdant' value = 'Choix dans la liste aleatoire'/>";
+$body.="<a href='../Roulette/roulette.html'><input type='submit' value = 'Tourner la roulette des gages' /></a>";*/
+$body.="</br>";
+$body.="</br>";
+$body.="</br>";
+
+$body.="<input  type='submit' value = 'Proposer aux admins'/>";
+$body.="</br>";
+              $body.="</br>";
+$body.="</form>";
+        
+        $req="SELECT * FROM Proposer_pari";
+        $body.="<table>\n";
+        $css="style.css";
+
+if((isset($_POST['Titre'])!=NULL)&&(isset($_POST['Libelle'])!=NULL)){
+$sqll="INSERT INTO Proposer_pari(Titre,Libelle) VALUES(lower('{$_POST['Titre']}'),lower('{$_POST['Libelle']}'));";
+if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
+
+}
+ 
+        
+if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
+
+
+     $body.="</table>\n";
+
+         
+       /* if(($_POST['Adresse_email']!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Pseudo']!=NULL)&&($_POST['Mot_de_passe']!=NULL)){
+        header ('location: accueil.html'); 
+      //  echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
+        }*/
+
+
+         
+
+?>	</div>
 </body>
 </html>

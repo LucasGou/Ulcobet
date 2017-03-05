@@ -62,6 +62,41 @@ if(isset($_POST['deco'])){
     <div class="DG_UlcoBet_disponibles">
       <p>[Description : ...]</p>
       <br>
+      <?php
+require_once "tag.lib.php";
+require_once "check.lib.php";
+
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+// comment differencier paris gagné / perdu , comment effectuer choix paris , description du pari ( new colonne )
+
+$title="paris dispo";
+
+$req="SELECT * FROM Pari WHERE Statut=0";
+
+$body="<table>\n";
+
+$css="style.css";
+
+
+if(!$result=$base->query($req)) die("Probleme $req");
+
+foreach($result as $row){
+$Titre=$row['#Titre']."\t";
+$Libelle=$row['#Libelle']."\t";
+$DateDebut=$row['DateDebut']."\t";
+$DateEcheance=$row['#DateEcheance']."\t";
+
+
+$body.=row(cell($Titre).cell($Libelle).cell($DateDebut).cell($DateEcheance));
+
+}
+
+$body.="</table>\n";
+
+
+?>
       <p>Côte totale :</p>
       <p>Mise :</p>
       <p>Gains : <a href="roulette"> Roulette des gains</a></p>
