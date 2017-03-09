@@ -86,26 +86,25 @@ $body.="</br>";
 $body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description complete et precise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>"; 
 $body.="</br>";
 $body.="</br>";
+              
+$body.="<input type='date' id='dated' name='datedebut' placeholder='aaaa/mm/jj'>";
+$body.="<input type='date' id='datef' name='datefin' placeholder='aaaa/mm/jj'>"; 
 
-/*
-$body.="<label for='Choix du gage pour le perdant'><h5>Choix du gage pour le perdant</h5></label>";
-$body.="<input type='submit' id='Choix du gage pour le perdant' value = 'Choix dans la liste aleatoire'/>";
-$body.="<a href='../Roulette/roulette.html'><input type='submit' value = 'Tourner la roulette des gages' /></a>";*/
 $body.="</br>";
 $body.="</br>";
 $body.="</br>";
 
 $body.="<input  type='submit' value = 'Proposer aux admins'/>";
 $body.="</br>";
-              $body.="</br>";
+$body.="</br>";
 $body.="</form>";
         
         $req="SELECT * FROM Proposer_pari";
         $body.="<table>\n";
         $css="style.css";
 
-if((isset($_POST['Titre'])!=NULL)&&(isset($_POST['Libelle'])!=NULL)){
-$sqll="INSERT INTO Proposer_pari(Titre,Libelle) VALUES(lower('{$_POST['Titre']}'),lower('{$_POST['Libelle']}'));";
+if((isset($_POST['Titre'])!=NULL)&&(isset($_POST['Libelle'])!=NULL)&&(isset($_POST['datedebut'])!=NULL)&&(isset($_POST['datefin'])!=NULL)){
+$sqll="INSERT INTO Proposer_pari(Titre,Libelle,DebutPari,DateFin) VALUES(lower('{$_POST['Titre']}'),lower('{$_POST['Libelle']}'),lower('{$_POST['datedebut']}'),lower('{$_POST['datefin']}'));";
 if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
 
 }
@@ -117,10 +116,13 @@ if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
      $body.="</table>\n";
 
          
-       /* if(($_POST['Adresse_email']!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Pseudo']!=NULL)&&($_POST['Mot_de_passe']!=NULL)){
-        header ('location: accueil.html'); 
-      //  echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
-        }*/
+        if(($_POST['Titre']!=NULL)&&($_POST['Libelle']!=NULL)&&($_POST['datedebut']!=NULL)&&($_POST['datefin']!=NULL)){
+        echo "<script>alert(\"PROPOSITION VALIDE\")</script>";  
+        }
+              
+        if(($_POST['Titre']==NULL)||($_POST['Libelle']==NULL)||($_POST['datedebut']==NULL)||($_POST['datefin']==NULL)){
+        echo "<script>alert(\"PROPOSITION NON VALIDE IL MANQUE UN RENSEIGNEMENT\")</script>";  
+        }
 
 
          

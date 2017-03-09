@@ -90,8 +90,9 @@ $body.="</br>";
 $body.="<label for='Mot_de_passe'><h5>Mot de passe</h5></label>";
 $body.="<input type text='Mot_de_passe' name='Mot_de_passe'>";
 $body.="</br>";  
-$body.="<input type=submit value='Inscription'>";
+$body.="<input type='submit' value='Inscription'";
 $body.="</br>";
+         
 $body.="</form>";
         
         $req="SELECT * FROM Utilisateur";
@@ -106,23 +107,27 @@ if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll ");
  
         
 if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
-/*
-foreach($result as $row){
-
-$IdUser=$row['IdUser']."\t";
-$Adresse_email=$row['Adresse_email']."\t";    
-$Nom= $row['Nom']."\t";
-$Prenom=$row['Prenom']."\t";
-$Pseudo=$row['Pseudo']."\t";
-$Mot_de_passe= $row['Mot_de_passe']."\t";
-} */
-     
-
-         
+    
         if((isset($_POST['Adresse_email'])!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Pseudo']!=NULL)&&($_POST['Mot_de_passe']!=NULL)){
-        header ('location: index.php');
-        //echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
+      
+        echo "<script>alert(\"INSCRIPTION VALIDE\")</script>";  
+        
+         //   header('location: index.php');
         }
+         
+         if((isset($_POST['Adresse_email'])==NULL)||($_POST['Nom']==NULL)||($_POST['Prenom']==NULL)||($_POST['Pseudo']==NULL)||($_POST['Mot_de_passe']==NULL)){
+      
+       echo "<script>alert(\"INSCRIPTION NON VALIDE CAR IL Y A UN ELEMENT MANQUANT !!!!!!\")</script>";  
+       
+        
+   
+   
+
+
+        
+         //   header('location: index.php');
+        }
+         
 
             
          
@@ -148,7 +153,7 @@ require_once "template.php";
         
         
         
-        ?>
+        
         
         
         

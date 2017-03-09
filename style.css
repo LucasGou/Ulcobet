@@ -1,4 +1,10 @@
-﻿/*GENERAL*/
+
+/**********CHOIX ***********/
+
+#choix {margin-top:200px;height:200px;width:200px;}
+
+
+/*GENERAL*/
 
 * {
     margin: 0;
@@ -563,6 +569,9 @@ td, th{
 border-left :1px dashed;
 
 }
+
+
+
 
 
 /*Mobile*/

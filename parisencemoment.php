@@ -89,8 +89,13 @@ $Libelle=$row['#Libelle']."\t";
 $DateDebut=$row['DateDebut']."\t";
 $DateEcheance=$row['#DateEcheance']."\t";
 
+    
 
-$body.=row(cell($Titre).cell($Libelle).cell($DateDebut).cell($DateEcheance));
+
+    $parier="<a href='choix.php'><input type='button' value='Parier'/></a>";
+    
+    
+$body.=row(cell($Titre).cell($Libelle).cell($DateDebut).cell($DateEcheance).cell($parier));
 
 }
 

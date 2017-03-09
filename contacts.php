@@ -77,7 +77,7 @@ require_once "check.lib.php";
 try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
 }catch(PDOException $error){ die($error->getMessage() );}
 
-            $body="<form method='POST' action=Contact.php>\n";
+            $body="<form method='POST' action=contacts.php>\n";
 
 
 $body.="<label for='nd'><h5>Nom d'utilisateur</h5></label>";  
@@ -91,7 +91,7 @@ $body.="<label for='Message'><h5>Message</h5></label>";
 $body.="<textarea text='text' id='Message' name='Message' placeholder='Ecrivez votre message' rows='10' cols='70'></textarea>"; 
 $body.="</br>";                
       $body.="</br>";           
-$body.="<input type=submit value='Envoyer'>";
+$body.="<input type='submit' value='Envoyer'>";
 $body.="</br>";
 $body.="</form>";
         
@@ -107,6 +107,21 @@ if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll ");
  
         
 if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
+            
+            
+             if((isset($_POST['nd'])!=NULL)&&($_POST['Adresse_email']!=NULL)&&($_POST['Message']!=NULL)){
+      
+        echo "<script>alert(\"Message envoyé\")</script>";  
+                 
+             }
+            
+            if((isset($_POST['nd'])==NULL)||($_POST['Adresse_email']==NULL)||($_POST['Message']==NULL)){
+      
+        echo "<script>alert(\"Il manque un element dans le formulaire pour l envoi du message\")</script>";  
+                 
+             }
+            
+            
 
      require_once "template.php";
 ?>
