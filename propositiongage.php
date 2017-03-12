@@ -1,7 +1,26 @@
 <?php
 session_start();
 if(isset($_POST['connex'])){
+	try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+$sth = $base->prepare('select * from Utilisateur');
+$sth->execute(array());
+$select = $sth->fetchAll();
+$users = 0;
+foreach($select as $s){
+	if(($s["Pseudo"] == $_POST['userid']) && ($s["Mot_de_passe"] == $_POST['pass'])){
 	$_SESSION['username'] = $_POST['userid'];
+	$users = 1;
+	}
+	
+}
+	if($users==0){
+	echo "<script>";
+	echo "alert('Veuillez rentrer un Pseudo ou mot de passe valide')";
+	echo "</script>";
+}
+
 }
 if(isset($_POST['deco'])){
 	session_destroy();
@@ -45,9 +64,10 @@ if(isset($_POST['deco'])){
 		<ul id="nav" class="myTopnav">
 			<li><a></a></li>
 			<li><a href="index.php">Accueil</a></li>
-			<li><a href="parisencemoment.php">En ce moment</a>
+			
 			<?php 
     			if(isset($_SESSION['username'])){
+    			echo "<li><a href='parisencemoment.php'>En ce moment</a>";
 					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
@@ -57,6 +77,7 @@ if(isset($_POST['deco'])){
  			    if(isset($_SESSION['username'])){
 					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
+					echo"<li><a href='moncompte.php'>Mon Compte</a></li>";
 				}
 			?>			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
 		</ul>
@@ -74,12 +95,12 @@ if(isset($_POST['deco'])){
 try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
 }catch(PDOException $error){ die($error->getMessage() );}
 
-$body="<form method='POST' action=PropositionGage.php>\n";
+$body="<form method='POST' action=propositiongage.php>\n";
 
 
 
 $body.="<label for='Libelle'><h5>Description du gage</h5></label>";
-$body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description complete et precise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>";
+$body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description comléte et précise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>";
 $body.="</br>";
 $body.="</br>";
 
@@ -88,12 +109,12 @@ $body.="</br>";
 $body.="</br>";
 $body.="</form>";
        
-        $req="SELECT * FROM Proposer_gage";
+        $req="SELECT * FROM Attribuer_gage";
         $body.="<table>\n";
          $css="style.css";
   
 if((isset($_POST['Libelle'])!=NULL)){
-$sqll="INSERT INTO Proposer_gage(Libelle) VALUES(lower('{$_POST['Libelle']}'));";
+$sqll="INSERT INTO Attribuer_gage(LibelleGage) VALUES(lower('{$_POST['Libelle']}'));";
 if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
 
 }
@@ -110,34 +131,7 @@ require_once "template.php";
 ?>
     
                 </div>
-            
-                
-                
-                
-                
-                
-                
-                
-           
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                 
                 
 </body>
 </html>

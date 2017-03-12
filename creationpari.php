@@ -1,7 +1,25 @@
 <?php
 session_start();
 if(isset($_POST['connex'])){
+	try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+$sth = $base->prepare('select * from Utilisateur');
+$sth->execute(array());
+$select = $sth->fetchAll();
+$users = 0;
+foreach($select as $s){
+	if(($s["Pseudo"] == $_POST['userid']) && ($s["Mot_de_passe"] == $_POST['pass'])){
 	$_SESSION['username'] = $_POST['userid'];
+	$users = 1;
+	}
+	
+}
+	if($users==0){
+	echo "<script>";
+	echo "alert('Veuillez rentrer un Pseudo ou mot de passe valide')";
+	echo "</script>";
+}
 }
 if(isset($_POST['deco'])){
 	session_destroy();
@@ -42,9 +60,10 @@ if(isset($_POST['deco'])){
 		<ul id="nav" class="myTopnav">
 			<li><a></a></li>
 			<li><a href="index.php">Accueil</a></li>
-			<li><a href="parisencemoment.php">En ce moment</a>
+			
 			<?php 
     			if(isset($_SESSION['username'])){
+    			echo "<li><a href='parisencemoment.php'>En ce moment</a>";
 					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
@@ -54,6 +73,7 @@ if(isset($_POST['deco'])){
  			    if(isset($_SESSION['username'])){
 					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
+					echo"<li><a href='moncompte.php'>Mon Compte</a></li>";
 				}
 			?>			
 			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
@@ -73,38 +93,43 @@ if(isset($_POST['deco'])){
 try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
 }catch(PDOException $error){ die($error->getMessage() );}
 
-$body="<form method='POST' action=Creationpari.php>\n";
+$body="<form method='POST' action=creationpari.php>\n";
 $body.=entete('Proposer votre pari');
 
 $body.="<label for='Titre'><h5>Titre du pari</h5></label>";
-$body.="<input type text='text' name='Titre' placeholder='Titre du paris'>";
+$body.="<input type text='text' name='Titre' placeholder='Damien aura-t-il son semestre?'>";
 $body.="</br>";
+$body.="<label for='Date'><h5>Date de debut et de fin du pari</h5></label>";
+$body.="<input type='date' id='dated' name='datedebut'>";///////////////// A AJOUTERRRRRRRRR
+$body.="<input type='date' id='datef' name='datefin'>"; ////////////////A AJOUTERRRRRRRRRR
+
+
 $body.="</br>";
 
               
               $body.="<label for='Libelle'><h5>Description du pari</h5></label>";
-$body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description complete et precise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>"; 
+$body.="<textarea text='Libelle' id='Libelle' name='Libelle' placeholder='Ecrivez une description comléte et précise de votre pari (mise en jeu, adversaire, categorie, ...)' rows='10' cols='70'></textarea>"; 
 $body.="</br>";
-$body.="</br>";
-              
-$body.="<input type='date' id='dated' name='datedebut' placeholder='aaaa/mm/jj'>";
-$body.="<input type='date' id='datef' name='datefin' placeholder='aaaa/mm/jj'>"; 
 
+/*
+$body.="<label for='Choix du gage pour le perdant'><h5>Choix du gage pour le perdant</h5></label>";
+$body.="<input type='submit' id='Choix du gage pour le perdant' value = 'Choix dans la liste aleatoire'/>";
+$body.="<a href='../Roulette/roulette.html'><input type='submit' value = 'Tourner la roulette des gages' /></a>";*/
 $body.="</br>";
 $body.="</br>";
 $body.="</br>";
 
 $body.="<input  type='submit' value = 'Proposer aux admins'/>";
 $body.="</br>";
-$body.="</br>";
+              $body.="</br>";
 $body.="</form>";
         
         $req="SELECT * FROM Proposer_pari";
         $body.="<table>\n";
         $css="style.css";
 
-if((isset($_POST['Titre'])!=NULL)&&(isset($_POST['Libelle'])!=NULL)&&(isset($_POST['datedebut'])!=NULL)&&(isset($_POST['datefin'])!=NULL)){
-$sqll="INSERT INTO Proposer_pari(Titre,Libelle,DebutPari,DateFin) VALUES(lower('{$_POST['Titre']}'),lower('{$_POST['Libelle']}'),lower('{$_POST['datedebut']}'),lower('{$_POST['datefin']}'));";
+if((isset($_POST['Titre'])!=NULL)&&(isset($_POST['Libelle'])!=NULL)){
+$sqll="INSERT INTO Proposer_pari(Titre,Libelle,DebutPari,DateFin) VALUES(lower('{$_POST['Titre']}'),lower('{$_POST['Libelle']}'),lower('{$_POST['datedebut']}'),lower('{$_POST['datefin']}'));";///////////// A AJOUTERRRRRRR
 if(!$affected_rows=$base->exec($sqll)) die(" Erreur : $sqll "); 
 
 }
@@ -116,36 +141,16 @@ if(!$result=$base->query($req, PDO::FETCH_ASSOC)) die("Probleme $req");
      $body.="</table>\n";
 
          
-        if(($_POST['Titre']!=NULL)&&($_POST['Libelle']!=NULL)&&($_POST['datedebut']!=NULL)&&($_POST['datefin']!=NULL)){
-        echo "<script>alert(\"PROPOSITION VALIDE\")</script>";  
-        }
-              
-        if(($_POST['Titre']==NULL)||($_POST['Libelle']==NULL)||($_POST['datedebut']==NULL)||($_POST['datefin']==NULL)){
-        echo "<script>alert(\"PROPOSITION NON VALIDE IL MANQUE UN RENSEIGNEMENT\")</script>";  
-        }
+       /* if(($_POST['Adresse_email']!=NULL)&&($_POST['Nom']!=NULL)&&($_POST['Prenom']!=NULL)&&($_POST['Pseudo']!=NULL)&&($_POST['Mot_de_passe']!=NULL)){
+        header ('location: accueil.html'); 
+      //  echo '<script language="javascript">alert("INSCRIPTION OK");</script>';   AFFICHER POPUP POUR PREVENIR INSCRIPTION OK
+        }*/
 
 
          
 require_once "template.php";
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	    </div>
 	
 </body>
