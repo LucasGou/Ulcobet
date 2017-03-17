@@ -8,6 +8,9 @@ $sth = $base->prepare('select * from Utilisateur');
 $sth->execute(array());
 $select = $sth->fetchAll();
 $users = 0;
+    
+   
+    
 foreach($select as $s){
 	if(($s["Pseudo"] == $_POST['userid']) && ($s["Mot_de_passe"] == $_POST['pass'])){
 	$_SESSION['username'] = $_POST['userid'];
@@ -62,14 +65,14 @@ if(isset($_POST['deco'])){
 						<?php 
     			if(isset($_SESSION['username'])){
     			echo "<li><a href='parisencemoment.php'>En ce moment</a>";
-					echo "<li><a href='parisresultats.php'>Resultats</a>";
+					echo "<li><a href='parisresultats.php'>RÃ©sultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
 			?>
 			<li><a href="contacts.php">Contact</a></li>
 			<?php 
  			    if(isset($_SESSION['username'])){
-					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
+					echo"<li><a href='creationpari.php'>CrÃ©er un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
 					echo"<li><a href='moncompte.php'>Mon Compte</a></li>";
 				}
@@ -84,7 +87,48 @@ if(isset($_POST['deco'])){
         <div class="AL_ParisGagnes">
                 <p>[Description...]</p>
             <br>
-            <p>Cote Totale : Mise : Gains : <a href="roulette">Roulette des gains</a></p>
+            
+            <?php
+require_once "tag.lib.php";
+require_once "check.lib.php";
+try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
+}catch(PDOException $error){ die($error->getMessage() );}
+
+$title="mes paris";
+        
+$body="<table>\n";
+$css="style.css";
+
+        
+    
+    $req =$base->prepare('SELECT * FROM Participer_pari WHERE PseudoUser=? '); 
+    $req->execute(array($_SESSION['username']));
+    $sel = $req->fetchAll();
+    //var_dump($req);
+
+foreach($sel as $row){
+    $req2 =$base->prepare('SELECT * FROM Pari WHERE IdPari=?');   
+    $req2->execute(array($row['IdPari']));
+    $sel2 = $req2->fetchAll();
+    //var_dump($req2);
+    $choix=$row['choix']; 
+    $body.=row(cell("IDPARI").cell("TITRE").cell("DESCRIPTION").cell("DATE FIN").cell("CHOIX"));
+        foreach($sel2 as $row){
+        
+        $Titre=$row['#Titre'];
+        $Libelle=$row['#Libelle'];
+        $DateEcheance=$row['#DateEcheance'];
+        $idpari=$row['IdPari'];
+  
+$body.=row(cell($idpari).cell($Titre).cell($Libelle).cell($DateEcheance).cell($choix));
+        }
+}
+$body.="</table>\n";
+require_once "template.php";
+?>
+        
+            <br/>
+            <a href="roulette">Roulette des gains</a>
         </div>
         
         <br>
