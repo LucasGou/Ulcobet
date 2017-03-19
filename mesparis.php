@@ -105,14 +105,14 @@ $css="style.css";
     $req->execute(array($_SESSION['username']));
     $sel = $req->fetchAll();
     //var_dump($req);
-
+$body.=row(cell("IDPARI").cell("TITRE").cell("DESCRIPTION").cell("DATE FIN").cell("CHOIX"));
 foreach($sel as $row){
     $req2 =$base->prepare('SELECT * FROM Pari WHERE IdPari=?');   
     $req2->execute(array($row['IdPari']));
     $sel2 = $req2->fetchAll();
     //var_dump($req2);
     $choix=$row['choix']; 
-    $body.=row(cell("IDPARI").cell("TITRE").cell("DESCRIPTION").cell("DATE FIN").cell("CHOIX"));
+    
         foreach($sel2 as $row){
         
         $Titre=$row['#Titre'];

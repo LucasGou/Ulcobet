@@ -80,6 +80,7 @@ if(isset($_POST['deco'])){
 <h1>Les Ulcobets :</h1>
     <h2>UlcoBet disponibles</h2><br>
     <div class="DG_UlcoBet_disponibles">
+      <p>Description : </p>
       <br>
         
          <?php
@@ -93,6 +94,7 @@ $req="SELECT * FROM Pari WHERE Statut=0";
 $body="<table>\n";
 $css="style.css";
 if(!$result=$base->query($req)) die("Probleme $req");
+$body.=row(cell("Description").cell("TITRE").cell("DateDebut").cell("DateFin").cell("PARIER"));
 foreach($result as $row){
 $Titre=$row['#Titre']."\t";
 $Libelle=$row['#Libelle']."\t";
@@ -108,15 +110,18 @@ $body.=row(cell($Titre).cell($Libelle).cell($DateDebut).cell($DateEcheance).cell
 $body.="</table>\n";
 require_once "template.php";
 ?>
-<br>
+        
+        
+        
+        
+        
+        
+        
+      <p>Côte totale :</p>
+      <p>Mise :</p>
       <p>Gains : <a href="roulette/roulette.php"> Roulette des gains</a></p>
     </div>
-	<div class="ecart">
-	</div>
-	 <h2>UlcoBet en cours</h2>
-    <div class="DG_UlcoBet_encours">
-<br>
-      <p>Gains : <a href="roulette/roulette.php"> Roulette des gains</a></p>
-    </div>
+	<br>
+	
   </body>
 </html>

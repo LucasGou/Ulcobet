@@ -64,14 +64,14 @@ if(isset($_POST['deco'])){
 			<?php 
     			if(isset($_SESSION['username'])){
     			echo "<li><a href='parisencemoment.php'>En ce moment</a>";
-					echo "<li><a href='parisresultats.php'>Resultats</a>";
+					echo "<li><a href='parisresultats.php'>RÃ©sultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
 			?>
 			<li><a href="contacts.php">Contact</a></li>
 			<?php 
  			    if(isset($_SESSION['username'])){
-					echo"<li><a href='creationpari.php'>Creer un pari</a></li>";
+					echo"<li><a href='creationpari.php'>CrÃ©er un pari</a></li>";
 					echo"<li><a href='propositiongage.php'>Proposer un gage</a></li>";
 					echo"<li><a href='moncompte.php'>Mon Compte</a></li>";
 				}
@@ -80,7 +80,9 @@ if(isset($_POST['deco'])){
 </div>
 <h1>Paris terminés :</h1>
     <h2>UlcoBet terminés</h2>
-    <div class="DG_UlcoBet_termines">
+    <div class="AL_ParisGagnes">
+      <p>[Description : ...]</p>
+      <br>
         <?php
 require_once "tag.lib.php";
 require_once "check.lib.php";
@@ -100,14 +102,17 @@ $css="style.css";
 
 
 if(!$result=$base->query($req)) die("Probleme $req");
-
+$body.=row(cell("TITRE").cell("DESCRIPTION").cell("DateFin").cell("Resultat"));
 foreach($result as $row){
 $Titre=$row['#Titre']."\t";
 $Libelle=$row['#Libelle']."\t";
 $DateEcheance=$row['#DateEcheance']."\t";
+$Resultat=$row['Resultat']."\t";
 
-
-$body.=row(cell($Titre).cell($Libelle).cell($DateEcheance));
+    
+    
+    
+$body.=row(cell($Titre).cell($Libelle).cell($DateEcheance).cell($Resultat));
 
 }
 
@@ -116,6 +121,8 @@ $body.="</table>\n";
 require_once "template.php";
 
 ?>
+        
+        
     </div>
 </body>
 </html>
