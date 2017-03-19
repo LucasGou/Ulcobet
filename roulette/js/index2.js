@@ -6,8 +6,9 @@ var clicks = 0;
 $(document).ready(function(){
 
 function ajaxOK(data){
-alert('le gain vous a été attribué, pour le consulter, allez sur la page moncompte');
+alert('le gage vous a été attribué, pour le consulter, allez sur la page moncompte');
 window.location.reload(true);
+console.log("refresh");
 }
 	
 	/*WHEEL SPIN FUNCTION*/
@@ -88,7 +89,7 @@ window.location.reload(true);
 	$.ajax({
    
     type: 'POST',
-    url: 'attributgain.php',
+    url: 'attributgage.php',
     data: param,
     success: ajaxOK
   });

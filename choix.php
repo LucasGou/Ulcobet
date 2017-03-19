@@ -3,6 +3,7 @@ session_start();
 if(isset($_POST['connex'])){
 	try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
 }catch(PDOException $error){ die($error->getMessage() );}
+
 $sth = $base->prepare('select * from Utilisateur');
 $sth->execute(array());
 $select = $sth->fetchAll();
@@ -26,11 +27,31 @@ foreach($select as $s){
 	echo "alert('Veuillez rentrer un Pseudo ou mot de passe valide')";
 	echo "</script>";
 }
+
 }
 if(isset($_POST['deco'])){
 	session_destroy();
 	header("Refresh:0");
 }
+
+if(isset($_POST['choix1']) || isset($_POST['choix2'])){
+	$choixenvoi = 1;
+	if(isset($_POST['choix1'])){
+	$choix = 1;
+	}
+	if(isset($_POST['choix2'])){
+	$choix = 2;
+	}
+}
+
+if(!isset($_POST['choix1']) && !isset($_POST['choix2'])){
+	$choixenvoi = 0;
+}
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +60,9 @@ if(isset($_POST['deco'])){
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Paris termines</title>
+    <title>Paris dispo</title>
     <link rel="stylesheet" href="style.css">
-<script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/temps.js"></script>
 
 		<script type="text/javascript" src="js/menu.js"></script>
@@ -54,13 +75,13 @@ if(isset($_POST['deco'])){
 		        <?php 
     if(isset($_SESSION['username'])){
     	echo "<h1 class='bonjour'>Bonjour, ".$_SESSION['username']."</h1>";
-    	echo "<form action='parisresultats.php' method='POST' id='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
+    	echo "<form action='parisencemoment.php' method='POST' id='formul'><button class='deco' name='deco'>Se deconnecter </button></form>";
     }
     
     
     
 	if(!isset($_SESSION['username'])){   
-    echo "<form action='parisresultats.php' method='POST' id='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button></form><a href='inscription.php'><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></a>";
+    echo "<form action='parisencemoment.php' method='POST' id='formul'><input type='text' placeholder='Nom de compte' name='userid' id='userid' class='userid'/><input type='password' placeholder='Mot de passe' name='pass' id='pass' class='pass' /><button class='connex' name='connex'>Se connecter </button></form><a href='inscription.php'><button class='inscri' value='inscription.php' name='inscr'>Inscription </button></a>";
     }?>	</div>
 
 <div class="container">
@@ -70,7 +91,7 @@ if(isset($_POST['deco'])){
 			
 			<?php 
     			if(isset($_SESSION['username'])){
-    			echo "<li><a href='parisencemoment.php'>En ce moment</a>";
+    				echo "<li><a href='parisencemoment.php'>En ce moment</a>";
 					echo "<li><a href='parisresultats.php'>Resultats</a>";
 					echo "<li><a href='mesparis.php'>Mes paris</a></li>";
 				}
@@ -91,36 +112,48 @@ if(isset($_POST['deco'])){
 			?>			<li class="icon"><a href="javascript:void(0);" onclick="myFunction()">&#9776;</a></li>
 		</ul>
 </div>
-<h1>Paris termines :</h1>
-    <h2>UlcoBet termines</h2>
-    <div class="AL_ParisGagnes">
-        <?php
-require_once "tag.lib.php";
+ <?php
+ 
+      require_once "tag.lib.php";
 require_once "check.lib.php";
 try{$base=new PDO('mysql:host=mysql-ulcobet.alwaysdata.net;dbname=ulcobet_db','ulcobet','TP3foreveR');
 }catch(PDOException $error){ die($error->getMessage() );}
-// comment differencier paris gagné / perdu , comment effectuer choix paris , description du pari ( new colonne )
-$title="paris dispo";
-$req="SELECT * FROM Pari WHERE Resultat IS NOT NULL";
-$body="<table>\n";
-$css="style.css";
-if(!$result=$base->query($req)) die("Probleme $req");
-$body.=row(cell("TITRE").cell("DESCRIPTION").cell("DateFin").cell("Resultat"));
-foreach($result as $row){
-$Titre=$row['#Titre']."\t";
-$Libelle=$row['#Libelle']."\t";
-$DateEcheance=$row['#DateEcheance']."\t";
-$Resultat=$row['Resultat']."\t";
-    
-    
-    
-$body.=row(cell($Titre).cell($Libelle).cell($DateEcheance).cell($Resultat));
+
+if($choixenvoi==1){
+
+$sth = $base->prepare("insert into Participer_pari(IdPari,PseudoUser,choix) values(?,?,?)");
+$sth->execute(array($_SESSION['idpari'],$_SESSION['username'],$choix));
+echo "<h2>Choix enregistré, cliquez <a href='parisencemoment.php'>ICI</a> pour retourner a la page des paris.</h2>";
+
 }
-$body.="</table>\n";
-require_once "template.php";
+
+
+
+
+if(isset($_POST['idpar']) && $choixenvoi==0){
+ 	$_SESSION['idpari'] = $_POST['idpar'];
+$sth = $base->prepare('select * from Pari where IdPari = ?');
+$sth->execute(array($_POST['idpar']));
+$select = $sth->fetchAll();
+
+foreach($select as $s){
+	$Choix1 = $s['choix1'];
+	$Choix2 = $s['choix2'];
+	$libelle = $s['#Libelle'];
+}
+echo "<h2>".$libelle."</h2>";
+// comment differencier paris gagné / perdu , comment effectuer choix paris , description du pari ( new colonne )
+$title="Choix resultat du pari";
+      $body="<div id='choix'>";
+      $body.="<form action='choix.php' method='post' id='choixform'>";
+      $body.="<button name='choix1' value='1' class='choix' id='choix1'>".$Choix1."</button>";
+      $body.="<button name='choix2' value='2' class='choix' id='choix2'>".$Choix2."</button>";
+      $body.="</form>";
+      $body.="</div>";
+      require_once "template.php";
+      
+      }
 ?>
-        
-        
-    </div>
+
 </body>
 </html>

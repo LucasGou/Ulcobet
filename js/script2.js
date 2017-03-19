@@ -1,7 +1,8 @@
 /* FORMULAIRE PAGE INSCRIPTION */
 
 $(document).ready(function() {
-    $('.Formu').submit(function(event)
+    
+    $('Formumu').submit(function(event)
     {
          event.preventDefault();
         $(":required").each(function()
